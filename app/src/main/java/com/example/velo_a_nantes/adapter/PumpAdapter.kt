@@ -20,12 +20,12 @@ import com.example.velo_a_nantes.ui.home.StationMapsActivity
 class PumpAdapter (private val pumps:List<Pump>, private val context: Context) :
     RecyclerView.Adapter<PumpAdapter.ViewHolder>() {
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val cardView : CardView = itemView.findViewById(R.id.cardView)
-        val name : TextView = itemView.findViewById(R.id.name)
+        val cardView : CardView = itemView.findViewById(R.id.cardViewPump)
+        val prixValeur : TextView = itemView.findViewById(R.id.prixValeur)
         val address : TextView = itemView.findViewById(R.id.address)
-        val status : ImageView = itemView.findViewById(R.id.status)
-        val availability : TextView = itemView.findViewById(R.id.availability)
-        val distance : TextView = itemView.findViewById(R.id.distance)
+        val statusPump : ImageView = itemView.findViewById(R.id.statusPump)
+        val available : TextView = itemView.findViewById(R.id.prixNom)
+        val distancePump : TextView = itemView.findViewById(R.id.distancePump)
     }
     // ici on charge le cardview
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,21 +38,21 @@ class PumpAdapter (private val pumps:List<Pump>, private val context: Context) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pump = pumps[position]
-        holder.name.text = pump.prixValeur.toString()
+        holder.prixValeur.text = pump.prixValeur.toString()
 
         if(currentLocation != null){
-            holder.distance.text = "${String.format("%.2f", currentLocation!!.distanceTo(pump.toLocation())/1000)}KM"
+            holder.distancePump.text = "${String.format("%.2f", currentLocation!!.distanceTo(pump.toLocation())/1000)}KM"
         }else{
-            holder.distance.text = "Géolocalisation désactivée."
+            holder.distancePump.text = "Géolocalisation désactivée."
         }
 
         holder.address.text = pump.adresse as CharSequence?
-        holder.availability.text =  "- \uD83D\uDCE2 ${pump.prixNom} -"
+        holder.available.text =  "- \uD83D\uDCE2 ${pump.prixNom} -"
 
         if(0.0 != pump.prixValeur){
-            holder.status.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
+            holder.statusPump.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
         }else{
-            holder.status.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
+            holder.statusPump.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
         }
 
 

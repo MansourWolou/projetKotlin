@@ -37,11 +37,12 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
 
         val recyclerViewPump = binding.recyclerViewPump
+        var progressBarPump = binding.progressBarPump
 
         dashboardViewModel.pumps.observe(viewLifecycleOwner) {
             recyclerViewPump.layoutManager = LinearLayoutManager(requireContext())
             recyclerViewPump.adapter = PumpAdapter(it, requireContext())
-            recyclerViewPump.visibility = View.GONE
+            progressBarPump.visibility = View.GONE
 
             allPumps = it
         }
